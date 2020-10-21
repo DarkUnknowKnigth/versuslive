@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "versus-live": {
+      "hosting": {
+        "versuslive": [
+          "versus-live"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "versus-live"
+  }
+}

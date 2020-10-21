@@ -1,0 +1,41 @@
+.vs{
+  font-size: 5em;
+  text-align: center;
+  margin: auto;
+  top: 48vh;
+  left: 38vw;
+  position: absolute;
+  z-index: 3;
+  width: fit-content;
+  font-weight: bolder;
+}
+.vs-cover {
+  width: 80vw;
+}
+mat-card {
+  width: fit-content;
+}
+mat-card :hover{
+  cursor: pointer;
+}
+.votes{
+  position: absolute;
+  left: 8vw;
+  top: 20vh;
+  font-size: 10em;
+}
+
+@media only screen and (min-width: 700px){
+
+  .vs-cover {
+    width: 30vw;
+  }
+  .vs{
+    left: 46%;
+  }
+  .votes{
+    left: 28%;
+    top: 50%;
+    font-size: 10em;
+  }
+}
