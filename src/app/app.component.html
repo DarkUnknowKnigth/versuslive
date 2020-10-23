@@ -7,9 +7,11 @@
 <mat-drawer-container class="container" autosize>
   <mat-drawer #drawer class="sidenav" mode="side">
     <mat-list role="list">
-      <mat-list-item role="listitem" *ngFor="let m of menu">
-        <a *ngIf="m.visible" mat-button [routerLink]="[m.link]" routerLinkActive="router-link-active">{{m.name}}</a>
-      </mat-list-item>
+      <div *ngFor="let m of menu">
+        <mat-list-item role="listitem" *ngIf="m.visible">
+          <a mat-button [routerLink]="[m.link]" routerLinkActive="router-link-active">{{m.name}}</a>
+        </mat-list-item>
+      </div>
       <mat-divider></mat-divider>
       <mat-list-item *ngIf="!user.uid">
         <a mat-button [routerLink]="['login']" routerLinkActive="router-link-active">Login</a>

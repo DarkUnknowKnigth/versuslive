@@ -1,7 +1,6 @@
-import { VersusModel } from './versus.model';
+import { SongModel } from './song.model';
 
 export class ListModel {
   date: string;
-  user: string;
-  songs: VersusModel[]
+  songs: SongModel[];
 }

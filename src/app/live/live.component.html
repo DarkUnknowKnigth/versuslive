@@ -1,15 +1,32 @@
-<mat-card>
-    <img matCardImage class="vs-cover" src="https://i.musicaimg.com/letras/200/300060.jpg">
+<div class="container center" *ngIf="versus">
+  <mat-card [ngStyle]="{'background-color': v[0] ? 'crimson':'dimgray' }" (click)="addVote(0)" *ngIf="enable1">
+      <img matCardImage class="vs-cover" [src]="versus[0].cover">
+      <mat-card-content>
+       {{versus[0].name}}
+        <span class="votes">{{versus[0].votes}}</span>
+        <br> por: <img matCardAvatar class="by" [src]="versus[0].userPhotoURL"> {{versus[0].userName}}
+      </mat-card-content>
+  </mat-card>
+  <div class="vs">VS</div>
+  <mat-card [ngStyle]="{'background-color': v[1] ? 'royalblue':'dimgray' }"  (click)="addVote(1)" *ngIf="enable2">
+      <mat-card-content>
+        {{versus[1].name}}
+        <span class="votes">{{versus[1].votes}}</span>
+        <br> por: <img matCardAvatar class="by" [src]="versus[1].userPhotoURL"> {{versus[1].userName}}
+      </mat-card-content>
+      <img matCardImage class="vs-cover" [src]="versus[1].cover">
+  </mat-card>
+  <mat-card *ngIf="!versus[0].song || !versus[1].song" style="position: absolute;top: -45%; left: 12%;">
     <mat-card-content>
-      Coldplay - Yellow
-      <span class="votes">50%</span>
+      <p>
+        ¡ Vamos postula una canción mas !
+      </p>
+      <a [routerLink]="['/admin']" mat-button color="accent">Pulsa Aqui</a>
     </mat-card-content>
-</mat-card>
-<div class="vs">VS</div>
-<mat-card>
-    <img matCardImage class="vs-cover" src="https://i.musicaimg.com/letras/200/300060.jpg">
-    <mat-card-content>
-      Coldplay - Yellow
-      <span class="votes">50%</span>
-    </mat-card-content>
-</mat-card>
+  </mat-card>
+</div>
+
+<ngx-audio-player class="bottom" [playlist]="playlist" [displayTitle]="displayTitle" [autoPlay]="false"
+  muted="muted" [displayPlaylist]="displayPlayList" [pageSizeOptions]="pageSizeOptions"
+      [displayVolumeControls]="displayVolumeControls" [expanded]="false" [disablePositionSlider]="disablePositionSlider" (trackEnded)="onEnded()"></ngx-audio-player>
+

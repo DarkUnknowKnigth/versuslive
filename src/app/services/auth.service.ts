@@ -38,18 +38,15 @@ export class AuthService {
   login(): void {
     // si hay datos en el local estorage se auto logea
     const user = JSON.parse(localStorage.getItem('_VERSUS_'));
-    if (user) {
+    if (user && user.uid) {
       this.setAuthUser(user);
       this.setAuthUserStatus(true);
       return;
     }
-    else{
-      this.authfb.signInWithPopup( new auth.GoogleAuthProvider()).then( u => {
-        console.log(u);
-        this.setAuthUser(u);
-        this.setAuthUserStatus(true);
-      });
-    }
+    this.authfb.signInWithPopup( new auth.GoogleAuthProvider()).then( u => {
+      this.setAuthUser(u);
+      this.setAuthUserStatus(true);
+    });
   }
   logout(): void {
     localStorage.removeItem('_VERSUS_');

@@ -8,8 +8,8 @@ mat-toolbar{
 }
 .sidenav-content {
   display: flex;
-  height: 100%;
-  width: 100%;
+  width: 98vw;
+  height: 80vh;
   align-items: center;
   justify-content: center;
 }

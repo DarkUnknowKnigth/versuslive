@@ -2,9 +2,6 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-mat-card{
-  width: 80vw;
-}
 .center {
   margin: auto;
   text-align: center;
@@ -12,4 +9,19 @@ mat-card{
 .circle-img{
   border-radius: 50%;
   margin-right: 5px;
+}
+ngx-audio-player{
+  width: 80vw;
+  position: absolute;
+  bottom: 10px;
+  left: 10vw;
+}
+ngx-audio-player > mat-card{
+  width: 80vw;
+}
+@media only screen and (max-width: 700px){
+  ngx-audio-player, ngx-audio-player > mat-card{
+    width: 99vw;
+    left: 0.2px;
+  }
 }

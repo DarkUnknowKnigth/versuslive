@@ -1,19 +1,26 @@
+.container {
+  margin-top: 5vh;
+}
+.by{
+  width: 10px;
+  height: 10px;
+}
 .vs{
-  font-size: 5em;
+  font-size: 10vh;
+  right: 10px;
   text-align: center;
   margin: auto;
-  top: 48vh;
-  left: 38vw;
+  top: 40vh;
   position: absolute;
   z-index: 3;
   width: fit-content;
   font-weight: bolder;
 }
 .vs-cover {
-  width: 80vw;
+  width: 70vw;
 }
-mat-card {
-  width: fit-content;
+mat-card  {
+  width: max-content;
 }
 mat-card :hover{
   cursor: pointer;
@@ -22,20 +29,50 @@ mat-card :hover{
   position: absolute;
   left: 8vw;
   top: 20vh;
+  -webkit-text-stroke:  slategray 3px;
+  color: white;
   font-size: 10em;
 }
 
 @media only screen and (min-width: 700px){
-
   .vs-cover {
-    width: 30vw;
+    width: 23vw;
   }
   .vs{
-    left: 46%;
+    font-size: 10vh;
+    right: 70vw;
   }
   .votes{
     left: 28%;
     top: 50%;
     font-size: 10em;
   }
+}
+@media only screen and (min-width: 2000px){
+
+  .vs-cover {
+    width: 15vw;
+  }
+  .vs{
+    font-size: 10vh;
+    right: 60vw;
+  }
+  .votes{
+    left: 28%;
+    top: 50%;
+    font-size: 10em;
+  }
+
+}
+.center {
+  position: absolute;
+  top: 505;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
 }

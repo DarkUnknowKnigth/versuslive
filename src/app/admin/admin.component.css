@@ -1,0 +1,32 @@
+input[type="text"]{
+ width: 100%;
+  border-radius: 2px;
+  border: none;
+}
+.cover {margin: auto;
+  width: 100%;
+}
+#card1{
+  background-color: royalblue;
+}
+.vs{
+  position: relative;
+  width: 90vw;
+  font-size: 5em;
+  z-index: 3;
+}
+#card2{
+  background-color: crimson;
+}
+@media only screen and (min-width: 700px){
+  mat-card{
+    width: 50vw;
+    text-align: start;
+  }
+}
+.center {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}

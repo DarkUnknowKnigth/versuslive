@@ -1,11 +1,74 @@
-<mat-card>
+<div *ngIf="canIVote" class="center">
+  <mat-card id="card1" *ngIf="!enable1">
+      <mat-card-header>
+          <mat-card-title>Canción 1</mat-card-title>
+      </mat-card-header>
+      <mat-card-content *ngIf="showing[0]">
+        <label for="name">
+          Nombre
+          <input matInput name="name" type="text" [(ngModel)]="songA0.name">
+        </label>
+        <br>
+        <label for="song">
+          Canción
+          <input name="song" type="file" (change)="updateSong($event, 0)" accept=".mp3">
+        </label>
+        <br>
+        <label for="name">
+          Cover
+          <input name="cover" type="file" (change)="updateCover($event, 0)" accept="image/*">
+        </label>
+      </mat-card-content>
+      <mat-card-actions align="end">
+          <button mat-button [disabled]="enable1" (click)="uploadVersus(0)">Subir</button>
+      </mat-card-actions>
+  </mat-card>
+  <mat-card *ngIf="enable1">
+      <mat-card-header>
+          <mat-card-title>{{versus[0].name}}</mat-card-title>
+      </mat-card-header>
+      <img matCardImage [src]="versus[0].cover" class="cover">
+      <mat-card-content style="margin: 10px;">
+        <img [src]="versus[0].userPhotoURL" style="width:25px;"><span style="margin-left: 20px;">por {{versus[0].userName}}</span>
+      </mat-card-content>
+  </mat-card>
+  <span class="vs">
+    VS
+  </span>
+  <mat-card id="card2" *ngIf="!enable2">
+      <mat-card-header>
+          <mat-card-title>Canción 2</mat-card-title>
+      </mat-card-header>
+      <mat-card-content  *ngIf="showing[1]">
+        <label for="name">
+          Nombre
+          <input matInput name="name" type="text" [(ngModel)]="songA1.name">
+        </label>
+        <br>
+        <label for="song">
+          Canción
+          <input name="song" type="file" (change)="updateSong($event, 1)" accept=".mp3">
+        </label>
+        <br>
+        <label for="name">
+          Cover
+          <input name="cover" type="file" (change)="updateCover($event, 1)" accept=".jpg">
+        </label>
+      </mat-card-content>
+      <mat-card-actions align="end">
+          <button mat-button [disabled]="enable2" (click)="uploadVersus(1)">Subir</button>
+      </mat-card-actions>
+  </mat-card>
+  <mat-card *ngIf="enable2">
     <mat-card-header>
-        <mat-card-title>Cancion 1</mat-card-title>
+        <mat-card-title>{{versus[1].name}}</mat-card-title>
     </mat-card-header>
-    <mat-card-content>
-
+    <img matCardImage [src]="versus[1].cover" class="cover">
+    <mat-card-content style="margin: 10px;">
+      <img [src]="versus[1].userPhotoURL" style="width:25px;"><span style="margin-left: 20px;">por {{versus[1].userName}}</span>
     </mat-card-content>
-    <mat-card-actions align="start">
-        <button mat-button>Subir</button>
-    </mat-card-actions>
-</mat-card>
+  </mat-card>
+</div>
+<div *ngIf="!canIVote">
+  Tiempo de votacion
+</div>

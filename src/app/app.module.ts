@@ -18,9 +18,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 // reactive forms
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 // http
 import { HttpClientModule } from '@angular/common/http';
@@ -31,6 +32,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
+
+// Libreria para audio
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
+import { from } from 'rxjs';
 
 
 @NgModule({
@@ -53,12 +58,14 @@ import { environment } from '../environments/environment';
     MatDividerModule,
     MatListModule,
     MatCardModule,
-    ReactiveFormsModule,
+    MatSnackBarModule,
+    FormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), // Inicializar firebase
     AngularFireAuthModule, // modulo de autenticacion
     AngularFireStorageModule, // modulo de almacenaje en la nube
-    AngularFireDatabaseModule, // modulo de base de datos en tiempo real
+    AngularFireDatabaseModule, // modulo de base de datos en tiempo real,
+    NgxAudioPlayerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

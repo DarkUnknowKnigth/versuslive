@@ -3,4 +3,6 @@ export class SongModel {
   song: string;
   cover: string;
   votes: number;
+  userName: string;
+  userPhotoURL: string;
 }
