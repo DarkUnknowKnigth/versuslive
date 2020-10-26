@@ -9,15 +9,15 @@
           <input matInput name="name" type="text" [(ngModel)]="this.songs[0].name">
         </label>
         <br>
-        <label for="song">
+        <label for="song" #n1>
           Canción
-          <input name="song" type="file" (change)="updateSong($event, 0)" accept=".mp3">
         </label>
+        <input name="song" type="file" (change)="updateSong($event, 0); n1.innerText=$event.target.files[0].name" accept=".mp3">
         <br>
-        <label for="name">
+        <label for="name" #c1>
           Cover
-          <input name="cover" type="file" (change)="updateCover($event, 0)" accept="image/*">
         </label>
+        <input name="cover" type="file" (change)="updateCover($event, 0);  c1.innerText=$event.target.files[0].name" accept="image/*">
       </mat-card-content>
       <mat-card-actions align="end">
           <button mat-button [disabled]="enable1" (click)="uploadVersus(0)">Subir</button>
@@ -45,15 +45,15 @@
           <input matInput name="name" type="text" [(ngModel)]="this.songs[1].name">
         </label>
         <br>
-        <label for="song">
+        <label for="song" #n2>
           Canción
-          <input name="song" type="file" (change)="updateSong($event, 1)" accept=".mp3">
         </label>
+        <input name="song" type="file" (change)="updateSong($event, 1); n2.innerText=$event.target.files[0].name" accept=".mp3">
         <br>
-        <label for="name">
+        <label for="name" #c2>
           Cover
-          <input name="cover" type="file" (change)="updateCover($event, 1)" accept=".jpg">
         </label>
+        <input name="cover" type="file" (change)="updateCover($event, 1); c2.innerText=$event.target.files[0].name" accept=".jpg">
       </mat-card-content>
       <mat-card-actions align="end">
           <button mat-button [disabled]="enable2" (click)="uploadVersus(1)">Subir</button>

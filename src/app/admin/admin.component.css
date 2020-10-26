@@ -30,3 +30,32 @@ input[type="text"]{
   left: 50%;
   transform: translate(-50%, 0);
 }
+input[type="file"] {
+  visibility: hidden;
+  width: 100%;
+  position: relative;
+}
+input[type="file"]::before {
+  content: 'Selecciona tu archivo';
+  display: block;
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: black;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #69F0AE;
+  font-weight: 700;
+  font-size: 10pt;
+  visibility: visible;
+  position: absolute;
+}
+input[type="file"]:hover::before {
+  border: 1px solid black;
+  border-color: rgb(32, 116, 53);
+}
+input[type="file"]:active::before {
+  background: -webkit-linear-gradient(top, #068065, #0a8a26);
+}

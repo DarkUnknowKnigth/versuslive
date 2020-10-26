@@ -19,7 +19,6 @@ export class AdminComponent implements OnInit {
   enable2Ref: AngularFireObject<boolean>;
   nextRef: AngularFireObject<boolean>;
   versusRef: AngularFireObject<SongModel[]>;
-
   // observables para escuchar eventos
   enable1$: Observable<boolean>;
   enable2$: Observable<boolean>;
@@ -93,7 +92,12 @@ export class AdminComponent implements OnInit {
           this.nextRef.set(false);
         }
         // bloquear la subida
-        index === 1 ? this.enable1Ref.set(true) : this.enable2Ref.set(true);
+        if (index === 0) {
+          this.enable1Ref.set(true);
+        } else {
+
+          this.enable2Ref.set(true);
+        }
         this.showing[index] = true;
         // informar que se completo
         this.openSnackBar('Realizado');
@@ -107,6 +111,7 @@ export class AdminComponent implements OnInit {
     } else {
       this.songs[index].song  = event.target.files[0];
     }
+    console.log(this.songs);
   }
   updateCover(event: any , index: number): void {
     if ( index === 0 ) {
