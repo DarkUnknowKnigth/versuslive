@@ -1,4 +1,4 @@
-<div class="container center" *ngIf="versus">
+<div class="container center" *ngIf="versus" (click)="list = false">
   <mat-card [ngStyle]="{'background-color': v[0] ? 'crimson':'dimgray' }" (click)="addVote(0)" *ngIf="enable1">
       <img matCardImage class="vs-cover" [src]="versus[0].cover">
       <mat-card-content>
@@ -16,7 +16,7 @@
       </mat-card-content>
       <img matCardImage class="vs-cover" [src]="versus[1].cover">
   </mat-card>
-  <mat-card *ngIf="!versus[0].song || !versus[1].song" style="position: absolute;top: -45%; left: 12%;">
+  <mat-card *ngIf="!versus[0].song || !versus[1].song" >
     <mat-card-content>
       <p>
         ¡ Vamos postula una canción mas !
@@ -25,8 +25,11 @@
     </mat-card-content>
   </mat-card>
 </div>
+<button *ngIf="!list" mat-fab color="accent"  aria-label="Example icon button with a delete icon" (click)="list = true" class="list">
+  <mat-icon>library_music</mat-icon>
+</button>
 
-<ngx-audio-player class="bottom" [playlist]="playlist" [displayTitle]="displayTitle" [autoPlay]="false"
+<ngx-audio-player [ngStyle]="{'display' : list ? 'block' : 'none'}" class="bottom" [playlist]="playlist" [displayTitle]="displayTitle" [autoPlay]="false"
   muted="muted" [displayPlaylist]="displayPlayList" [pageSizeOptions]="pageSizeOptions"
       [displayVolumeControls]="displayVolumeControls" [expanded]="false" [disablePositionSlider]="disablePositionSlider" (trackEnded)="onEnded()"></ngx-audio-player>
 

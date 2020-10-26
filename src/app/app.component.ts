@@ -12,6 +12,7 @@ export class AppComponent {
   user: any = {};
   menu = [];
   constructor(private authsv: AuthService, private router: Router){
+    // Subscribirnos a el observable auth.user para ver cambios en el usuario
     this.authsv.user.subscribe( user => {
       this.user = user;
       this.menu  = [
@@ -29,6 +30,7 @@ export class AppComponent {
 
     });
   }
+  // Cerrar sesion haciendo uso del servicio creado
   logout(): void{
     this.authsv.logout();
     this.router.navigateByUrl('login');

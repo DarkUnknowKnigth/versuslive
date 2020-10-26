@@ -14,19 +14,22 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  enable1Ref: AngularFireObject<any>;
-  enable1$: Observable<boolean>;
-  enable1: boolean;
-  enable2Ref: AngularFireObject<any>;
-  enable2$: Observable<boolean>;
-  enable2: boolean;
+  // refrerencias al la base de datos
+  enable1Ref: AngularFireObject<boolean>;
+  enable2Ref: AngularFireObject<boolean>;
   nextRef: AngularFireObject<boolean>;
-  next$: Observable<boolean>;
   versusRef: AngularFireObject<SongModel[]>;
+
+  // observables para escuchar eventos
+  enable1$: Observable<boolean>;
+  enable2$: Observable<boolean>;
+  next$: Observable<boolean>;
   versus$: Observable<SongModel[]>;
+  // variables locales
+  enable1: boolean;
+  enable2: boolean;
   canIVote: boolean;
-  songA0 = new SongModel();
-  songA1 = new SongModel();
+  songs = [new SongModel(), new SongModel()];
   versus: SongModel[] = [];
   user: any;
   showing = [true, true];
@@ -48,7 +51,7 @@ export class AdminComponent implements OnInit {
     this.enable1$ = this.enable1Ref.valueChanges();
     this.enable2$ = this.enable2Ref.valueChanges();
     this.next$ = this.nextRef.valueChanges();
-    // escuchar cambios
+    // escuchar cambios y almacenarlos en variales locales
     this.authsv.user.subscribe(user => this.user = user);
     this.enable1$.subscribe(enable => this.enable1 = enable );
     this.enable2$.subscribe(enable => this.enable2 = enable );
@@ -58,96 +61,65 @@ export class AdminComponent implements OnInit {
   }
   ngOnInit(): void {
   }
+  // subir canciones al storage
   async uploadVersus(index: number): Promise<any>{
-    // verificar de cual se trata
     this.openSnackBar('Subiendo');
-    if (index === 0) {
-      this.showing[0] = false;
-      // subir los archivos a firebase
-      const songName = `${this.songA0.name}-song`;
-      const coverName = `${this.songA0.name}-cover`;
-      const songRef = this.storage.ref(songName);
-      const coverRef = this.storage.ref(coverName);
-      await this.storage.upload(songName, this.songA0.song);
-      await this.storage.upload(coverName, this.songA0.cover);
-      coverRef.getDownloadURL().subscribe( c => {
-        songRef.getDownloadURL().subscribe( s => {
-          // agregando el nombre de los contendientes
-          this.songA0.userName = this.user.displayName;
-          this.songA0.userPhotoURL = this.user.photoURL;
-          // inicializar los votos
-          this.songA0.votes = 0;
-          // obtener la url de la cancion
-          this.songA0.song = s;
-          // obtener la url del cover
-          this.songA0.cover = c;
-          // agregar al versus a firebase
-          console.log(this.songA0);
-          this.versus[0] = this.songA0;
-          this.versusRef.update(this.versus);
-          if (this.versus[0].song && this.versus[1].song) {
-            this.nextRef.set(false);
-          }
-          // bloquear la subida
-          this.enable1Ref.set(true);
-          this.showing[0] = true;
-          this.openSnackBar('Realizado');
-        });
+    this.showing[index] = false;
+    // subir los archivos a firebase
+    const songName = `${this.songs[index].name}-song`;
+    const coverName = `${this.songs[index].name}-cover`;
+    // crear referencia al storage
+    const songRef = this.storage.ref(songName);
+    const coverRef = this.storage.ref(coverName);
+    // subir archivo esperar promesa de retorno
+    await this.storage.upload(songName, this.songs[index].song);
+    await this.storage.upload(coverName, this.songs[index].cover);
+    // obtener el link de descarga
+    coverRef.getDownloadURL().subscribe( c => {
+      songRef.getDownloadURL().subscribe( s => {
+        // agregando el nombre de los contendientes
+        this.songs[index].userName = this.user.displayName;
+        this.songs[index].userPhotoURL = this.user.photoURL;
+        // inicializar los votos
+        this.songs[index].votes = 0;
+        // obtener la url de la cancion
+        this.songs[index].song = s;
+        // obtener la url del cover
+        this.songs[index].cover = c;
+        // agregar al versus a firebase
+        this.versus[index] = this.songs[index];
+        this.versusRef.update(this.versus);
+        if (this.versus[0].song && this.versus[1].song) {
+          this.nextRef.set(false);
+        }
+        // bloquear la subida
+        index === 1 ? this.enable1Ref.set(true) : this.enable2Ref.set(true);
+        this.showing[index] = true;
+        // informar que se completo
+        this.openSnackBar('Realizado');
       });
-    } else {
-      this.showing[1] = false;
-      const songName = `${this.songA1.name}-song`;
-      const coverName = `${this.songA1.name}-cover`;
-      const songRef = this.storage.ref(songName);
-      const coverRef = this.storage.ref(coverName);
-      await this.storage.upload(songName, this.songA1.song);
-      await this.storage.upload(coverName, this.songA1.cover);
-      coverRef.getDownloadURL().subscribe( c => {
-        songRef.getDownloadURL().subscribe( s => {
-          // agregando el nombre de los contendientes
-          this.songA1.userName = this.user.displayName;
-          this.songA1.userPhotoURL = this.user.photoURL;
-          // inicializar los votos
-          this.songA1.votes = 0;
-          // obtener la url de la cancion
-          this.songA1.song = s;
-          // obtener la url del cover
-          this.songA1.cover = c;
-          // agregar al versus a firebase
-          console.log(this.songA1);
-          this.versus[1] = this.songA1;
-          this.versusRef.update(this.versus);
-          if (this.versus[0].song && this.versus[1].song) {
-            console.log(1);
-            this.nextRef.set(false);
-          }
-          // bloquear la subida
-          this.enable2Ref.set(true);
-          this.showing[1] = true;
-          this.openSnackBar('Realizado');
-        });
-      });
-    }
+    });
   }
+  // guardar los archivos en variables locales para su posterior uso
   updateSong(event: any , index: number): void {
     if ( index === 0 ) {
-     this.songA0.song = event.target.files[0];
+     this.songs[index].song = event.target.files[0];
     } else {
-      this.songA1.song  = event.target.files[0];
+      this.songs[index].song  = event.target.files[0];
     }
   }
   updateCover(event: any , index: number): void {
     if ( index === 0 ) {
-      this.songA0.cover = event.target.files[0];
+      this.songs[index].cover = event.target.files[0];
     } else {
-      this.songA1.cover = event.target.files[0];
+      this.songs[index].cover = event.target.files[0];
     }
   }
   openSnackBar(message: string): void {
-    this.snackbar.open( message, 'Ok',{
+    this.snackbar.open( message, 'Ok', {
       duration: this.duration * 1000,
       horizontalPosition: 'center',
-      verticalPosition: 'bottom'
+      verticalPosition: 'bottom',
     });
   }
 }

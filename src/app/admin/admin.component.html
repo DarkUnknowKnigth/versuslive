@@ -6,7 +6,7 @@
       <mat-card-content *ngIf="showing[0]">
         <label for="name">
           Nombre
-          <input matInput name="name" type="text" [(ngModel)]="songA0.name">
+          <input matInput name="name" type="text" [(ngModel)]="this.songs[0].name">
         </label>
         <br>
         <label for="song">
@@ -42,7 +42,7 @@
       <mat-card-content  *ngIf="showing[1]">
         <label for="name">
           Nombre
-          <input matInput name="name" type="text" [(ngModel)]="songA1.name">
+          <input matInput name="name" type="text" [(ngModel)]="this.songs[1].name">
         </label>
         <br>
         <label for="song">

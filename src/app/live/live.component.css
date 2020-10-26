@@ -1,26 +1,33 @@
 .container {
   margin-top: 5vh;
 }
+.list{
+  position: absolute;
+  right:10px;
+  bottom: 10px;
+}
 .by{
   width: 10px;
   height: 10px;
 }
 .vs{
   font-size: 10vh;
-  right: 10px;
+  right: -10vw;
   text-align: center;
   margin: auto;
-  top: 40vh;
+  top: 53vh;
   position: absolute;
   z-index: 3;
   width: fit-content;
   font-weight: bolder;
+  cursor: pointer;
 }
 .vs-cover {
   width: 70vw;
 }
 mat-card  {
   width: max-content;
+  margin-top: 10px;
 }
 mat-card :hover{
   cursor: pointer;
@@ -40,7 +47,8 @@ mat-card :hover{
   }
   .vs{
     font-size: 10vh;
-    right: 70vw;
+    right: -20vw;
+    top: 30vh;
   }
   .votes{
     left: 28%;
@@ -55,7 +63,8 @@ mat-card :hover{
   }
   .vs{
     font-size: 10vh;
-    right: 60vw;
+    right: -10vw;
+    top: 35vh;
   }
   .votes{
     left: 28%;

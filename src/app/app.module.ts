@@ -48,7 +48,7 @@ import { from } from 'rxjs';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatToolbarModule,
+    MatToolbarModule, // Modulos material
     MatSidenavModule,
     MatProgressBarModule,
     BrowserAnimationsModule,
@@ -58,9 +58,9 @@ import { from } from 'rxjs';
     MatDividerModule,
     MatListModule,
     MatCardModule,
-    MatSnackBarModule,
-    FormsModule,
-    HttpClientModule,
+    MatSnackBarModule, // end modulos material
+    FormsModule, // Uso de fromularios
+    HttpClientModule, // conexion a internet
     AngularFireModule.initializeApp(environment.firebaseConfig), // Inicializar firebase
     AngularFireAuthModule, // modulo de autenticacion
     AngularFireStorageModule, // modulo de almacenaje en la nube

@@ -13,6 +13,7 @@
         </mat-list-item>
       </div>
       <mat-divider></mat-divider>
+      <!-- verificar si esta autenticado  -->
       <mat-list-item *ngIf="!user.uid">
         <a mat-button [routerLink]="['login']" routerLinkActive="router-link-active">Login</a>
       </mat-list-item>
