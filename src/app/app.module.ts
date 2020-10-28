@@ -35,7 +35,6 @@ import { environment } from '../environments/environment';
 
 // Libreria para audio
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
-import { from } from 'rxjs';
 
 
 @NgModule({
