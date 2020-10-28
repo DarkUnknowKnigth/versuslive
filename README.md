@@ -16,8 +16,16 @@ Run `ng build --prod`
 ## Subir a firebase
 
 Run `ng build --prod`
+
+
 Run `firebase login`
+
+
 Run `firebase init`
+
+
 Run `Cambiar el directorio (public) por dist/versuslive`
+
+
 Run `firebase deploy`
 
